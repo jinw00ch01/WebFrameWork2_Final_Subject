@@ -1,6 +1,7 @@
 package kr.ac.hansung.cse.hellospringdatajpa.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,7 +12,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @Entity
-@Table(name = "product")
+@Table(name = "product", schema = "sales")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +21,8 @@ public class Product {
     private String name;
     private String brand;
     private String madeIn;
+
+    @Min(value = 0, message = "Price must be non-negative")
     private double price;
 
     public Product(String name, String brand, String madeIn, double price) {
